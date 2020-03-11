@@ -1,0 +1,4 @@
+django>=3.0
+djangorestframework>=3.11
+djangorestframework-jwt>=1.11
+mysqlclient
