@@ -12,7 +12,7 @@ class Music(models.Model):
     ntes_id = models.CharField(max_length=255, blank=True, null=True)  # 网易云音乐ID
     music_name = models.CharField(max_length=255, blank=False, null=False)  # 歌曲名字
     music_auth = models.CharField(max_length=255)  # 歌曲作者
-    music_url = models.URLField()  # 歌曲的URL路径，网易云的不能存这个URL，自己上传的才存URL
+    music_url = models.URLField()  # 歌曲的URL路径，网易云的不能存这个URL(这个URL有失效时间)，自己上传的才存URL
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
@@ -37,6 +37,9 @@ class SongSheet(models.Model):
     id = models.BigAutoField(primary_key=True)
     sheet_name = models.CharField(max_length=255, blank=False, null=False)  # 自建歌单名字
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)  # 用户的ID
+    img_url = models.URLField(blank=True, null=True)  # 歌单封面
+    song_sheet_desc = models.TextField(default='')  # 歌单描述
+    is_public = models.BooleanField(default=False)  # 歌单是否公开
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
@@ -71,6 +74,9 @@ class RadioStation(models.Model):
     id = models.BigAutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)  # 用户的ID，就是这个电台是谁创建的
     radio_name = models.CharField(max_length=255, blank=False, null=False)  # 自建歌单名字
+    img_url = models.URLField(blank=True, null=True)  # 封面URL
+    radio_desc = models.TextField(default='')  # 电台描述
+    label = models.CharField(max_length=255, blank=True, null=True)  # 电台的标签
     radio_classification = models.CharField(max_length=20, choices=RadioType.choices,
                                             default=RadioType.Casual)  # 电台类型
     create_time = models.DateTimeField(auto_now_add=True)
