@@ -9,7 +9,7 @@ ENV PROJECT_DIR=/opt/vue_music/
 
 COPY ./ $PROJECT_DIR
 
-COPY ./.env_sample $PROJECT_DIR/.env
+#COPY ./.env_sample $PROJECT_DIR/.env
 
 WORKDIR $PROJECT_DIR
 
@@ -25,4 +25,4 @@ ENV PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
 
 EXPOSE 8000
 
-CMD ["python", "manager.py", "runserver", "0:8000"]
+CMD ["python", "manage.py", "runserver", "0:8000"]
