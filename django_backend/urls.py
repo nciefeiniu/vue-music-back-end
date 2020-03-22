@@ -21,7 +21,7 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh
 urlpatterns = [
     path('api/v1/music/', include('music.urls')),
     path('admin/', admin.site.urls),
-    path('api-token-auth/', obtain_jwt_token),
-    path('api-token-verify/', verify_jwt_token),
-    path('api-token-refresh/', refresh_jwt_token)
+    path('api/v1/api-token-auth/', obtain_jwt_token),
+    path('api/v1/api-token-verify/', verify_jwt_token),
+    path('api/v1/api-token-refresh/', refresh_jwt_token)
 ]

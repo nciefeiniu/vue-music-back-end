@@ -25,7 +25,7 @@ SECRET_KEY = 'h5j9m#su-*mlbv9%@(q==cx0i%i7)_w0qkmg$ewub+xffsc@)9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -79,8 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bs',
         'USER': 'root',
-        'PASSWORD': '820403',
-        'HOST': '192.168.3.76',
+        'PASSWORD': '123456',
+        'HOST': '192.168.3.100',
         'PORT': '3306',
     }
 }
@@ -121,6 +121,16 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'music.utils.jwt_resp.jwt_response_payload_handler',
 }
 
+# django redis
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://172.17.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -139,3 +149,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 163music
+NTES_URL = 'http://139.9.53.199:8088/'
