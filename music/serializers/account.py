@@ -31,17 +31,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class MyLoveMusicSerializer(serializers.ModelSerializer):
-    music_name = serializers.RelatedField(source='music', read_only=True)
-    music_auth = serializers.RelatedField(source='music', read_only=True)
-    music_url = serializers.RelatedField(source='music', read_only=True)
-
-    def create(self, validated_data):
-        return MyLoveMusic.objects.create(**validated_data)
+    music_name = serializers.CharField(source="music_id.music_name")
+    music_auth = serializers.CharField(source="music_id.music_auth")
 
     class Meta:
         model = MyLoveMusic
-        fields = ('id', 'music_name', 'music_auth', 'music_url')
-        read_only_fields = ('id', 'music_name', 'music_auth', 'music_url')
+        fields = "__all__"
+        # read_only_fields = ('id', 'music_name', 'music_auth')
 
 
 class SongSheetListSerializer(serializers.ModelSerializer):

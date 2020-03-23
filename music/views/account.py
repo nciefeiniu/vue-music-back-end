@@ -1,5 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
+import json
+import traceback
 
 from django.http import JsonResponse
 
@@ -47,16 +49,19 @@ class MyLoveMusicList(AuthenticationBaseAPIView):
     def get(self, request):
         # print(request.user.id)
         my_love_music = MyLoveMusic.objects.filter(user_id=request.user.id)
-        my_love_music_data = MyLoveMusicSerializer(my_love_music)
+        my_love_music_data = MyLoveMusicSerializer(my_love_music, many=True)
         return JsonResponse({"code": 200, "data": my_love_music_data.data, "error": ""})
 
     def post(self, request):
         # 增加歌曲到我喜欢里面
-        serializer = MyLoveMusicSerializer({**request.data, **{"user_id": request.user.id}})
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
-        return JsonResponse({"code": 500, "data": "", "error": serializer.errors})
+        print(request.data, request.user.id)
+        try:
+            mlm = MyLoveMusic(user_id=request.user, music_id_id=request.data['id'])
+            mlm.save()
+            return JsonResponse({"code": 200, "data": 'ok', "error": ""})
+        except:
+            print(traceback.format_exc())
+            return JsonResponse({"code": 500, "data": "", "error": "ERROR"})
 
 
 class MySongSheetList(AuthenticationBaseAPIView):
