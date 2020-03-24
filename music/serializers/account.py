@@ -33,6 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
 class MyLoveMusicSerializer(serializers.ModelSerializer):
     music_name = serializers.CharField(source="music_id.music_name")
     music_auth = serializers.CharField(source="music_id.music_auth")
+    id = serializers.IntegerField(source='music_id.id')
 
     class Meta:
         model = MyLoveMusic
