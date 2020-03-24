@@ -7,8 +7,7 @@ from music.models import UploadImages
 
 
 class UploadImageSerializer(serializers.ModelSerializer):
-    # file = serializers.CharField()
-    relative_url = serializers.CharField(source='file')
+    relative_url = serializers.CharField(source='file', default='')
 
     class Meta:
         model = UploadImages
