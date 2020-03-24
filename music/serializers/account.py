@@ -47,3 +47,10 @@ class SongSheetListSerializer(serializers.ModelSerializer):
         model = SongSheet
         fields = ("id", "sheet_name")
         read_only_fields = ("id",)
+
+
+class SongSheetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SongSheet
+        fields = ("id", "sheet_name", "user_id", "img_url", "song_sheet_desc", "is_public")

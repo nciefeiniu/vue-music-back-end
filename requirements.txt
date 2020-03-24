@@ -3,3 +3,4 @@ djangorestframework>=3.11
 djangorestframework-jwt>=1.11
 django-redis
 requests
+Pillow

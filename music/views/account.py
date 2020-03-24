@@ -72,3 +72,20 @@ class MySongSheetList(AuthenticationBaseAPIView):
         my_song_sheet_list = SongSheet.objects.filter(user_id=request.user.id)
         serializer = SongSheetListSerializer(my_song_sheet_list)
         return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
+
+
+class MySongSheet(AuthenticationBaseAPIView):
+    """
+    我的歌单
+    """
+    def post(self, request):
+        """
+        新建歌单
+        :param request:
+        :return:
+        """
+        serializer = SongSheetSerializer(**{**request.data, **{"user_id": request.user.id}})
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
+        return JsonResponse({"code": 500, "data": serializer.errors, "error": ""})

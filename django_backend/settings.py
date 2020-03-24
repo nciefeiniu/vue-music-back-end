@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'bs',
         'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': '192.168.3.100',
+        'HOST': '172.17.0.1',
         'PORT': '3306',
     }
 }
@@ -147,7 +147,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static')
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static/'),
+)
 STATIC_URL = '/static/'
 
 # 163music

@@ -17,7 +17,7 @@ class Music(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ('music_name', 'music_auth')
+        unique_together = [['music_name', 'music_auth']]
 
 
 class MyLoveMusic(models.Model):
@@ -29,7 +29,7 @@ class MyLoveMusic(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("user_id", "music_id")
+        unique_together = [["user_id", "music_id"]]
 
 
 class SongSheet(models.Model):
@@ -44,7 +44,7 @@ class SongSheet(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("sheet_name", "user_id")
+        unique_together = [["sheet_name", "user_id"]]
 
 
 class SongSheetMusic(models.Model):
@@ -56,7 +56,7 @@ class SongSheetMusic(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("song_sheet_id", "music_id")
+        unique_together = [["song_sheet_id", "music_id"]]
 
 
 class RadioStation(models.Model):
@@ -83,7 +83,7 @@ class RadioStation(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("radio_name", "radio_classification")
+        unique_together = [["radio_name", "radio_classification"]]
 
 
 class RadioStationMusic(models.Model):
@@ -95,4 +95,10 @@ class RadioStationMusic(models.Model):
     update_time = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("radio_station_id", "music_id")
+        unique_together = [["radio_station_id", "music_id"]]
+
+
+class UploadImages(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(max_length=150)
+    file = models.ImageField(upload_to='static/uploads')
