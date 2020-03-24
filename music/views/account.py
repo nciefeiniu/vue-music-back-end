@@ -84,7 +84,8 @@ class MySongSheet(AuthenticationBaseAPIView):
         :param request:
         :return:
         """
-        serializer = SongSheetSerializer(**{**request.data, **{"user_id": request.user.id}})
+        print(request.data)
+        serializer = SongSheetSerializer(data={**request.data, **{"user_id": request.user.id}})
         if serializer.is_valid():
             serializer.save()
             return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
