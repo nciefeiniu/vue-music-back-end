@@ -33,16 +33,18 @@ class HotMusic(APIView):
                 "ntes_id": music['id'],
                 "music_auth": '/'.join([str(auth['name']) for auth in music['ar']])
             }
-            final_data.append(_tmp)
             try:
-                music = Music.objects.create(**_tmp)
-                music.save()
+                _music = Music.objects.create(**_tmp)
+                _music.save()
             except:
                 print(traceback.format_exc())
                 print('charu shibai')
+                _music = Music.objects.filter(ntes_id=music['id'], music_auth=_tmp['music_auth'], music_name=music['name']).first()
+            _tmp['id'] = _music.id
+            final_data.append(_tmp)
         cache.set('vue-music-hot', json.dumps(final_data), timeout=60 * 60 * 24 * 7)
 
     def get(self, request):
         if not cache.ttl('vue-music-hot'):
             self.get_hot_music()
-        return JsonResponse(json.loads(cache.get('vue-music-hot')),safe=False)
+        return JsonResponse({"code": 200, "data": json.loads(cache.get('vue-music-hot')), "error": ""},safe=False)
