@@ -45,8 +45,7 @@ class SongSheetListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SongSheet
-        fields = ("id", "sheet_name")
-        read_only_fields = ("id",)
+        fields = "__all__"
 
 
 class SongSheetSerializer(serializers.ModelSerializer):

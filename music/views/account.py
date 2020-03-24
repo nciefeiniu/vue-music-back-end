@@ -70,7 +70,7 @@ class MySongSheetList(AuthenticationBaseAPIView):
     """
     def get(self, request):
         my_song_sheet_list = SongSheet.objects.filter(user_id=request.user.id)
-        serializer = SongSheetListSerializer(my_song_sheet_list)
+        serializer = SongSheetListSerializer(my_song_sheet_list, many=True)
         return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
 
 
