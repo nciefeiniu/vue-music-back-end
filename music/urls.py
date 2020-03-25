@@ -10,7 +10,7 @@ from music.views.hot import HotMusic
 from music.views.search import SearchMusic
 from music.views.music2url import MusicUrl
 from music.views.upload_image import FileViewSet
-from music.views.song_sheet import PublickSongSheets
+from music.views.song_sheet import PublickSongSheets, AddMusic2SongSheet
 
 
 router = routers.DefaultRouter()
@@ -27,5 +27,6 @@ urlpatterns = [
     path('song_url/', MusicUrl.as_view(), name='music_url'),
     path('song_sheet/', MySongSheet.as_view(), name='my_song_sheet'),
     path('public_song_sheet/', PublickSongSheets.as_view(), name="publick_song_sheet"),
+    path('songsheet/music/', AddMusic2SongSheet.as_view(), name="songsheet_music"),
     path('', include(router.urls))
 ]

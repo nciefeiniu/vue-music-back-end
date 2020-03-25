@@ -19,3 +19,10 @@ class MusicUrlSerializer(serializers.ModelSerializer):
         model = Music
         fields = ('id', 'music_name', 'music_auth', 'music_url')
         read_only_fields = ('id',)
+
+
+class AddMusic2SongSheetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SongSheetMusic
+        fields = ('id', "music_id", "song_sheet_id")
