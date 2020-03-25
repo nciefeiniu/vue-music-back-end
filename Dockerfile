@@ -25,4 +25,6 @@ ENV PYTHONPATH=$PYTHONPATH:$PROJECT_DIR
 
 EXPOSE 8000
 
+RUN python manage.py migrate
+
 CMD ["python", "manage.py", "runserver", "0:8000"]
