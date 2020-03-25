@@ -12,7 +12,7 @@ from django_backend.settings import NTES_URL
 from music.models import Music, SongSheet, SongSheetMusic
 from music.serializers.account import SongSheetListSerializer
 from music.views.account import AuthenticationBaseAPIView
-from music.serializers.music import AddMusic2SongSheetSerializer
+from music.serializers.music import AddMusic2SongSheetSerializer, SongSheetMusicsSerializer
 
 
 class PublickSongSheets(APIView):
@@ -35,3 +35,10 @@ class AddMusic2SongSheet(AuthenticationBaseAPIView):
             serializer.save()
             return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
         return JsonResponse({"code": 500, "data": serializer.errors, "error": ""})
+
+
+class SongSheetMusics(APIView):
+    def get(self, request, sid):
+        ssm = SongSheetMusic.objects.filter(song_sheet_id=sid)
+        serializer = SongSheetMusicsSerializer(ssm, many=True)
+        return JsonResponse({"code": 200, "data": serializer.data, "error": ""})
