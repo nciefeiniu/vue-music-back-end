@@ -4,3 +4,4 @@ djangorestframework-jwt>=1.11
 django-redis
 requests
 Pillow
+mysqlclient

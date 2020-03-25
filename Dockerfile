@@ -13,7 +13,7 @@ COPY ./ $PROJECT_DIR
 
 WORKDIR $PROJECT_DIR
 
-RUN apt update && apt install -y tzdata locales gcc apt-transport-https ca-certificates libmariadb-dev-compat libmariadb-dev libmysqlclient-dev python3-dev
+RUN apt update && apt install -y tzdata locales gcc apt-transport-https ca-certificates libmysqlclient-dev python3-dev
 
 RUN pip3 install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
 
