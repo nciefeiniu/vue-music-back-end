@@ -81,3 +81,9 @@ class UploadMusicSerializer(serializers.ModelSerializer):
     class Meta:
         model = UploadMuisc
         fields = "__all__"
+
+
+class RadioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RadioStation
+        fields = "__all__"
