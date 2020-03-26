@@ -74,3 +74,10 @@ class SongSheetMusicsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SongSheetMusic
         fields = "__all__"
+
+
+class UploadMusicSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UploadMuisc
+        fields = "__all__"

@@ -102,3 +102,14 @@ class UploadImages(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=150)
     file = models.ImageField(upload_to='static/uploads')
+
+
+class UploadMuisc(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    music_name = models.CharField(max_length=150)
+    path = models.CharField(max_length=255, default='')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'upload_music'
