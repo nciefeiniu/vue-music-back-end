@@ -87,3 +87,13 @@ class RadioSerializer(serializers.ModelSerializer):
     class Meta:
         model = RadioStation
         fields = "__all__"
+
+
+class RadioAddMusicSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source="music_id.id", read_only=True)
+    music_name = serializers.CharField(source="music_id.music_name", read_only=True)
+    music_auth = serializers.CharField(source='music_id.music_auth', read_only=True)
+
+    class Meta:
+        model = RadioStationMusic
+        fields = "__all__"
