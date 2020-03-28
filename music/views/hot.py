@@ -40,6 +40,8 @@ class HotMusic(APIView):
                 print(traceback.format_exc())
                 print('charu shibai')
                 _music = Music.objects.filter(ntes_id=music['id'], music_auth=_tmp['music_auth'], music_name=music['name']).first()
+            if not _music:
+                continue
             _tmp['id'] = _music.id
             final_data.append(_tmp)
         cache.set('vue-music-hot', json.dumps(final_data), timeout=60 * 60 * 24 * 7)

@@ -5,10 +5,12 @@ import traceback
 
 from django.http import JsonResponse
 
+from rest_framework_jwt.settings import api_settings
 from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
+from rest_framework import status
 from django.contrib.auth import get_user_model  # If used custom user model
 
 from rest_framework.permissions import IsAuthenticated
@@ -19,6 +21,10 @@ from music.serializers.account import *
 from music.models import *
 
 
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+
 # 创建用户
 class CreateUserView(CreateAPIView):
     model = get_user_model()
@@ -26,6 +32,17 @@ class CreateUserView(CreateAPIView):
         permissions.AllowAny  # Or anon users can't register
     ]
     serializer_class = UserSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        payload = jwt_payload_handler(User.objects.get(pk=serializer.data.get('id')))
+        token = jwt_encode_handler(payload)
+        data = serializer.data
+        data['token'] = token
+        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class AuthenticationBaseAPIView(APIView):
